@@ -30,9 +30,14 @@ def sendMail(publicIP):
     bodyText = 'Your new public IP address is ' + publicIP
     message = '\r\n'.join(['To: %s' % recipent, 'From: %s' % sender, 
               'Subject: %s' % subject, '', bodyText])
-    # sending the mail
-    server = smtplib.SMTP(smtpServer)
-    server.starttls()
+    # you need to uncomment either the starttls or the ssl part depending
+    # on what your mail server accepts
+    
+    # sending mail using starttls authentication
+    # server = smtplib.SMTP(smtpServer)
+    # server.starttls()
+    # sending mail using ssl authentication    
+    # server = smtplib.SMTP_SSL(smtpServer)
     server.login(username,password)
     server.sendmail(sender, recipent, message)
     server.quit()
